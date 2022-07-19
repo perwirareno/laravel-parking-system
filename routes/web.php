@@ -19,7 +19,6 @@ Route::group(['middleware' => ['web', 'auth']],function(){
 
 	Route::get('/home', 'HomeController@index')->name('home');
 
-
 	Route::resource('Menu', 'Admin\MenuController');
     Route::get('/HapusMenu/{id}', 'Admin\MenuController@destroy');
 

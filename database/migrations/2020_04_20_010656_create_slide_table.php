@@ -18,6 +18,7 @@ class CreateSlideTable extends Migration
             $table->string('name')->nullable();
             $table->string('file')->nullable();
             $table->string('urut')->nullable();
+            $table->string('extension')->nullable();
             $table->timestamps();
         });
     }

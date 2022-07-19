@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $cek = Auth::user();
+        $nama = Auth::user()->name;
 
-        dd($cek); die();
-        return view('admin/template', compact('cek'));
+        return view('admin/template', compact('nama'));
     }
 }

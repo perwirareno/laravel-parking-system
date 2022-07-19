@@ -15,11 +15,6 @@ use DataTables;
 
 class PenggunaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -30,9 +25,19 @@ class PenggunaController extends Controller
 
             return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('roleuser', function($data){
+                        $rolename = "";
+                        if ($data->roleuser == 1) {
+                            $rolename = "Admin";    
+                        } else {
+                            $rolename = "Petugas Parkir";
+                        }
+                        return $rolename;
+                    })
                     ->addColumn('action', function($row){
-                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Edit" class="btn bg-warning btn-xs editSlide"><i class="fas fa-edit"></i></a>';
-                        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Delete" class="btn bg-danger btn-xs hapusSlide"><i class="fas fa-trash"></i></a>';
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Edit" class="btn bg-warning btn-sm editUser">Edit <i class="fas fa-edit"></i></a>';
+                        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Delete" class="btn bg-danger btn-sm hapusUser">Hapus <i class="fas fa-trash"></i></a>';
+                        $btn = '<center>'.$btn.'</center>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -43,22 +48,6 @@ class PenggunaController extends Controller
         return view('admin/pengguna/index', compact('judul'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if(!empty($request->password)){
@@ -69,6 +58,7 @@ class PenggunaController extends Controller
                 [
                     'name' => $request->name,
                     'email' => $request->email,
+                    'roleuser' => $request->roleuser,
                     'password' => Hash::make($request->password)
                 ]
             );
@@ -80,54 +70,20 @@ class PenggunaController extends Controller
                 ],
                 [
                     'name' => $request->name,
-                    'email' => $request->email
+                    'email' => $request->email,
+                    'roleuser' => $request->roleuser
                 ]
             );
             return response()->json(['success'=>'Pengguna saved successfully.']);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $User = User::find($id);
         return response()->json($User);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         User::find($id)->delete();
