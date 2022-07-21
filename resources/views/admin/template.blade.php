@@ -95,27 +95,15 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="{{ url('Menu') }}" class="nav-link">
-                                <i class="nav-icon fas fa-list-ul"></i> &nbsp;<p>Menu</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ url('Website') }}" class="nav-link">
-                                <i class="nav-icon fas fa-link"></i> &nbsp;<p>Website Utama</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ url('Slide') }}" class="nav-link">
-                                <i class="nav-icon fas fa-images"></i> &nbsp;<p>Slide</p>
+                            <a href="{{ url('Parkir') }}" class="nav-link">
+                                <i class="nav-icon fas fa-parking"></i> &nbsp;<p>Master Parkir</p>
                             </a>
                         </li>
 
                         @if(Auth::user()->roleuser == 1)
                         <li class="nav-item">
                             <a href="{{ url('Pengguna') }}" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i> &nbsp;<p>Data Pengguna</p>
+                                <i class="nav-icon fas fa-users"></i> &nbsp;<p>Master Pengguna</p>
                             </a>
                         </li>
                         @endif

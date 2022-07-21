@@ -45,7 +45,7 @@
 
 <body>
     <div class="container">
-        <div class="row justify-content-center" style="margin-top: 15%">
+        <div class="row justify-content-center" style="margin-top: 10%">
             <div class="col-md-5">
                 <div class="card" style="border-radius: 10px; background-color: rgba(255, 255, 255, 0.5);box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)">
                     <div class="card-body">
